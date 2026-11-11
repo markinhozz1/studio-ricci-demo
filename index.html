@@ -5,10 +5,33 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="robots" content="noindex, nofollow">
   <title>Demonstração — Studio Ricci Odontologia</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Cormorant+Garamond:ital,wght@0,500;0,600;1,500&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+  <meta name="description" content="Demonstração de página para o Studio Ricci Odontologia, no bairro Cerâmica, em Rio Branco: avaliação, tratamentos, horário e local. Não é o site oficial do consultório.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:title" content="Demonstração — Studio Ricci Odontologia">
+  <meta property="og:description" content="Proposta de página para o Studio Ricci Odontologia, em Rio Branco. Demonstração — não é o site oficial do consultório.">
+  <meta property="og:image" content="https://studio-ricci-demo.vercel.app/og-image.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Monograma SR dourado sobre fundo preto, com o texto Studio Ricci Odontologia e o aviso de demonstração.">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="preload" href="/fonts/outfit-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/outfit-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/outfit-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/cinzel-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/cinzel-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/cormorant-garamond-latin-500-normal.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="/fonts/cormorant-garamond-latin-600-normal.woff2" as="font" type="font/woff2" crossorigin>
   <style>
+    /* Fontes auto-hospedadas (SIL OFL 1.1, ver /fonts/OFL-*.txt). Só os pesos usados no CSS. */
+    @font-face { font-family: "Outfit"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/outfit-latin-400-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Outfit"; font-style: normal; font-weight: 500; font-display: swap; src: url("/fonts/outfit-latin-500-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Outfit"; font-style: normal; font-weight: 600; font-display: swap; src: url("/fonts/outfit-latin-600-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Cinzel"; font-style: normal; font-weight: 400; font-display: swap; src: url("/fonts/cinzel-latin-400-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Cinzel"; font-style: normal; font-weight: 600; font-display: swap; src: url("/fonts/cinzel-latin-600-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 500; font-display: swap; src: url("/fonts/cormorant-garamond-latin-500-normal.woff2") format("woff2"); }
+    @font-face { font-family: "Cormorant Garamond"; font-style: normal; font-weight: 600; font-display: swap; src: url("/fonts/cormorant-garamond-latin-600-normal.woff2") format("woff2"); }
     :root {
       --black: #0d0c0a;
       --ink: #161411;
@@ -23,7 +46,10 @@
       --gold-line: rgba(198, 161, 90, 0.35);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; scroll-padding-top: 5.5rem; }
+    @media (min-width: 800px) {
+      html { scroll-padding-top: 3.5rem; }
+    }
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
     }
@@ -40,7 +66,7 @@
     .demo-banner {
       position: sticky;
       top: 0;
-      z-index: 20;
+      z-index: 40;
       background: #1a1610;
       color: #f4ead6;
       text-align: center;
@@ -243,6 +269,7 @@
       border-radius: 1.1rem;
       padding: 1.25rem 1.15rem 1.35rem;
     }
+    .step h3 { font-weight: 600; }
     .step-num {
       display: block;
       font-family: Cinzel, "Times New Roman", serif;
@@ -278,16 +305,23 @@
       background: #f7f1e6;
     }
     footer p + p { margin-top: 0.55rem; }
+    /* Modal: div role="dialog" + inert no restante da página (não <dialog>.showModal(),
+       porque o top layer cobriria a faixa de demonstração). z-index 30 < faixa (40). */
     .modal {
       position: fixed;
       inset: 0;
       background: rgba(13, 12, 10, 0.55);
       display: none;
       place-items: center;
-      padding: 1.2rem;
+      padding: 6.5rem 1.2rem 1.2rem;
       z-index: 30;
+      overflow-y: auto;
+    }
+    @media (min-width: 800px) {
+      .modal { padding-top: 4.5rem; }
     }
     .modal.open { display: grid; }
+    body.modal-open { overflow: hidden; }
     .modal-card {
       background: var(--paper);
       border-radius: 1.1rem;
@@ -300,7 +334,7 @@
   </style>
 </head>
 <body>
-  <div class="demo-banner">Demonstração — proposta de página. Não é o site oficial do Studio Ricci Odontologia. Nenhuma mensagem é enviada daqui.</div>
+  <div class="demo-banner" role="region" aria-label="Aviso de demonstração">Demonstração — proposta de página. Não é o site oficial do Studio Ricci Odontologia. Nenhuma mensagem é enviada daqui.</div>
   <header>
     <a class="wordmark" href="#topo">
       <strong>STUDIO RICCI</strong>
@@ -361,8 +395,8 @@
           <p>Facetas finas indicadas após avaliação, de acordo com o que for adequado ao seu caso.</p>
         </article>
         <article>
-          <h3>Invisalign</h3>
-          <p>Alinhamento com alinhadores transparentes, quando essa for a opção escolhida com a equipe.</p>
+          <h3>Alinhadores transparentes</h3>
+          <p>Alinhamento dos dentes com placas transparentes, quando essa for a opção escolhida com a equipe.</p>
         </article>
         <article>
           <h3>Resina estética</h3>
@@ -434,31 +468,13 @@
     <p>Página de demonstração preparada para apresentação. Não é o site oficial do Studio Ricci Odontologia e não substitui o perfil nem o atendimento do consultório.</p>
     <p>Responsável técnico: nome e CRO a confirmar.</p>
   </footer>
-  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title" aria-describedby="modal-desc" hidden>
     <div class="modal-card">
       <h2 id="modal-title">Esta é só uma demonstração</h2>
-      <p>Na versão final, este botão abre o WhatsApp da clínica. Aqui nenhuma mensagem é enviada.</p>
+      <p id="modal-desc">Na versão final, este botão abre o WhatsApp da clínica. Aqui nenhuma mensagem é enviada.</p>
       <button class="btn btn-primary" type="button" id="close-modal">Entendi</button>
     </div>
   </div>
-  <script>
-    const modal = document.getElementById("modal");
-    const openBtn = document.getElementById("whatsapp-demo");
-    const closeBtn = document.getElementById("close-modal");
-    function openModal() {
-      modal.classList.add("open");
-      closeBtn.focus();
-    }
-    function closeModal() {
-      modal.classList.remove("open");
-      openBtn.focus();
-    }
-    openBtn.addEventListener("click", openModal);
-    closeBtn.addEventListener("click", closeModal);
-    modal.addEventListener("click", (event) => { if (event.target === modal) closeModal(); });
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && modal.classList.contains("open")) closeModal();
-    });
-  </script>
+  <script src="/app.js" defer></script>
 </body>
 </html>
